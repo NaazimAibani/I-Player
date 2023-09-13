@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+
+
+  <meta charset="UTF-8" />
+  <title>CMS</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+
+  <style>
+    body {
+      background: teal;
+      font: 300 18px/18px Roboto
+    }
+
+    *,
+    :after,
+    :before {
+      box-sizing: border-box
+    }
+
+    .clearfix:after,
+    .clearfix:before {
+      content: '';
+      display: table
+    }
+
+    .clearfix:after {
+      clear: both;
+      display: block
+    }
+
+    .mobile-wrap {
+      margin: auto;
+      width: 100%;
+      max-height: fit-content;
+      overflow: hidden;
+      position: relative;
+      background: url(https://raw.githubusercontent.com/khadkamhn/secret-project/master/img/background.jpg) center no-repeat;
+      box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19)
+    }
+
+    .mobile-wrap:before {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      content: '';
+      position: absolute;
+      background: rgba(90, 93, 165, .8);
+      background: linear-gradient(to bottom, rgba(90, 93, 165, 1), rgba(0, 0, 0, .7))
+    }
+
+    .mobile {
+      z-index: 99;
+      color: #fff;
+      height: 100%;
+      padding: 15px;
+      position: relative
+    }
+
+    .mobile .header {
+      clear: both;
+      overflow: hidden;
+      padding-top: 15px;
+      position: relative
+    }
+
+    .mobile .header>span {
+      font-size: 24px;
+      min-width: 24px
+    }
+
+    .mobile .header>.title {
+      font-size: 16px;
+      line-height: 24px;
+      margin-left: 15px
+    }
+
+    .mobile .header .pull-left {
+      float: left
+    }
+
+    .mobile .header .pull-right {
+      float: right
+    }
+
+    .mobile .header .ion-ios-search {
+      z-index: 999;
+      position: relative;
+    }
+
+    .mobile .header .ion-ios-arrow-back {
+      min-width: 25px
+    }
+
+    .mobile .header .ion-ios-navicon>i {
+      height: 1px;
+      width: 20px;
+      margin-top: 5px;
+      background: #fff;
+      position: relative;
+      display: inline-block
+    }
+
+    .mobile .header .ion-ios-navicon>i:after,
+    .mobile .header .ion-ios-navicon>i:before {
+      content: '';
+      width: inherit;
+      height: inherit;
+      position: absolute;
+      background: inherit
+    }
+
+    .mobile .header .ion-ios-navicon>i:before {
+      bottom: 12px
+    }
+
+    .mobile .header .ion-ios-navicon>i:after {
+      bottom: 6px
+    }
+
+    .mobile .header .search {
+      right: 0;
+      bottom: 0;
+      position: absolute;
+    }
+
+    .mobile .header .search input {
+      width: 0;
+      color: #fff;
+      height: 24px;
+      border: none;
+      font-size: 16px;
+      max-width: 150px;
+      font-weight: 300;
+      padding-right: 30px;
+      font-family: inherit;
+      background: transparent;
+      transition: all .3s ease-in-out 0s;
+      border-bottom: 1px solid transparent;
+      -webkit-appearance: textfield;
+    }
+
+    .mobile .header .search input:focus {
+      outline: none;
+    }
+
+    .mobile .header .search input::-webkit-search-decoration,
+    .mobile .header .search input::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+    }
+
+    .mobile .header .search .search-visible {
+      width: 100%;
+      border-bottom-color: #aaa;
+    }
+
+    .nav {
+      right: 15px;
+      z-index: 20;
+      width: 45px;
+      bottom: 15px;
+      height: 45px;
+      display: block;
+      position: absolute;
+      line-height: 45px;
+      border-radius: 50%;
+      box-shadow: 0 0 5px 0 rgba(0, 0, 0, .75);
+      overflow-y: scroll;
+      
+    }
+
+    .mask {
+      z-index: 21;
+      color: #fff;
+      width: inherit;
+      height: inherit;
+      cursor: pointer;
+      font-size: 28px;
+      text-align: center;
+      border-radius: 50%;
+      position: absolute;
+      background: #f23363;
+      transition: all .1s ease-in-out 0s
+    }
+
+    .nav.active .mask {
+      background: #cf0e3f;
+      transform: rotate(-135deg)
+    }
+
+    .nav:after {
+      top: 0;
+      left: 0;
+      content: '';
+      width: inherit;
+      height: inherit;
+      border-radius: 50%;
+      position: absolute;
+      background: #f23363;
+      transition: all .1s ease-in-out 0s
+    }
+
+    .nav.active:after {
+      top: -125px;
+      left: -125px;
+      width: 350px;
+      height: 350px
+    }
+
+    .nav-item {
+      top: 0;
+      left: 0;
+      z-index: 19;
+      width: 45px;
+      height: 45px;
+      color: #fff;
+      font-size: 24px;
+      transform: none;
+      line-height: 45px;
+      border-radius: 50%;
+      position: absolute;
+      text-align: center;
+      transition: all .3s cubic-bezier(.68, 1.55, .265, 1)
+    }
+
+    .nav.active .nav-count-1 {
+      transform: translate(10px, -100px)
+    }
+
+    .nav.active .nav-count-2 {
+      transform: translate(-35px, -80px)
+    }
+
+    .nav.active .nav-count-3 {
+      transform: translate(-80px, -45px)
+    }
+
+    .nav.active .nav-count-4 {
+      transform: translate(-100px, 0)
+    }
+
+    .pull-left {
+      float: left
+    }
+
+    .pull-right {
+      float: right
+    }
+
+    .html,
+    .invisible {
+      display: none
+    }
+
+    .html.visible,
+    .visible {
+      display: block
+    }
+
+    .sidebar .sidebar-content,
+    .sidebar .sidebar-overlay {
+      top: 0;
+      left: 0;
+      bottom: 0;
+      position: absolute;
+      overflow-y: scroll;
+      transition: all .3s ease-in-out 0s
+    }
+
+    .sidebar .sidebar-overlay {
+      right: 0;
+      opacity: 0;
+      width: 100%;
+      z-index: 999;
+      transform: scale(0);
+      background: rgba(0, 0, 0, .4)
+    }
+
+    .sidebar .sidebar-content {
+      width: 30%;
+      color: #333;
+      padding: 15px;
+      z-index: 9999;
+      background: #fff;
+      transform: translateX(-100%)
+    }
+
+    .sidebar.active .sidebar-content {
+      transform: translateX(0)
+    }
+
+    .sidebar.active .sidebar-overlay {
+      opacity: 1;
+      transform: scale(1)
+    }
+
+    .sidebar .sidebar-content .top-head .name {
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 5px
+    }
+
+    .sidebar .sidebar-content .top-head .email {
+      font-size: 13px;
+      margin-bottom: 50px
+    }
+
+    .sidebar .sidebar-content .nav-left>a {
+      color: #333;
+      display: block;
+      font-size: 16px;
+      padding: 10px 0;
+      line-height: 24px;
+      vertical-align: top;
+      text-decoration: none
+    }
+
+    .sidebar .sidebar-content .nav-left>a>span {
+      color: #aaa;
+      font-size: 24px;
+      min-width: 40px;
+      display: inline-block
+    }
+
+    .html.chats,
+    .html.search,
+    .html.compose,
+    .html.credits,
+    .html.settings,
+    .html.welcome {
+      margin-top: 50px
+    }
+
+    .on-off {
+      display: none
+    }
+
+    .on-off+label {
+      width: 30px;
+      height: 10px;
+      position: relative;
+      border-radius: 5px;
+      background: #dedee0;
+      display: inline-block;
+      transition: all .3s ease-in-out 0s
+    }
+
+    .on-off+label:after {
+      left: 0;
+      top: -2px;
+      width: 15px;
+      content: '';
+      height: 15px;
+      position: absolute;
+      border-radius: 50%;
+      background: #bebdc2;
+      transition: all .3s ease-in-out 0s
+    }
+
+    .on-off:checked+label {
+      background: #fd99b3
+    }
+
+    .on-off:checked+label:after {
+      left: 15px;
+      background: #fb3666
+    }
+
+    .btn {
+      color: #eee;
+      width: 100%;
+      border: none;
+      font-size: 16px;
+      padding: 12px 24px;
+      background: #cf0e3f;
+      border-radius: 30px
+    }
+
+    .search .title {
+      font-size: 24px;
+    }
+
+    .search .title p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 18px;
+    }
+
+    .welcome .datetime .date,
+    .welcome .datetime .day {
+      margin-bottom: 15px
+    }
+
+    .welcome .datetime .day {
+      font-size: 28px;
+      -webkit-animation-duration: .2s;
+      animation-duration: .2s
+    }
+
+    .welcome .datetime .date {
+      -webkit-animation-duration: .35s;
+      animation-duration: .35s
+    }
+
+    .forecast {
+      margin-top: 30px
+    }
+
+    .forecast .temperature {
+      text-align: right
+    }
+
+    .forecast .datetime .day,
+    .forecast .temperature .unit {
+      font-size: 28px;
+      min-height: 33px
+    }
+
+    .forecast .datetime .date,
+    .forecast .temperature .location {
+      color: #ccc;
+      font-size: 12px
+    }
+
+    .forecast .temperature .unit>i {
+      top: -2px;
+      font-style: normal;
+      position: relative
+    }
+
+    .forecast .animated {
+      -webkit-animation-duration: .2s;
+      animation-duration: .2s
+    }
+
+    .alarm-list {
+      margin-top: 50px
+    }
+
+    .alarm-list .note {
+      padding: 10px 0
+    }
+
+    .alarm-list .note:nth-child(1) {
+      -webkit-animation-duration: .2s;
+      animation-duration: .2s
+    }
+
+    .alarm-list .note:nth-child(2) {
+      -webkit-animation-duration: .3s;
+      animation-duration: .3s
+    }
+
+    .alarm-list .note:nth-child(3) {
+      -webkit-animation-duration: .4s;
+      animation-duration: .4s
+    }
+
+    .alarm-list .note .time {
+      min-width: 35px;
+      margin-right: 30px
+    }
+
+    .alarm-list .note .time>.shift,
+    .alarm-list .note .to-do>.subject {
+      color: #ccc;
+      font-size: 11px
+    }
+
+    .alarm-list .note .time {
+      text-align: center
+    }
+
+    .alarm-list .note .to-do>.title {
+      font-size: 14px
+    }
+
+    .alarm-list .note:not(:last-child) {
+      position: relative
+    }
+
+    .alarm-list .note:not(:last-child):before {
+      bottom: 0;
+      width: 82%;
+      content: '';
+      right: -15px;
+      position: absolute;
+      border-bottom: 1px solid rgba(170, 170, 170, .5)
+    }
+
+    .user-list .user {
+      width: 30px;
+      height: 30px;
+      margin: 4px;
+      overflow: hidden;
+      border-radius: 50%;
+      display: inline-block;
+      border: 1px solid #bbb
+    }
+
+    .user-list .user>img {
+      width: 100%
+    }
+
+    .compose .forms .group {
+      margin-bottom: 15px
+    }
+
+    .compose .forms .group>label {
+      padding: 6px 0;
+      min-width: 40px;
+      display: inline-block
+    }
+
+    .compose .forms .group>label>span {
+      min-width: 20px;
+      display: inline-block
+    }
+
+    .compose .forms .group input,
+    .compose .forms .group textarea {
+      color: #fff;
+      border: none;
+      resize: none;
+      min-width: 185px;
+      background: 0 0;
+      padding: 5px 10px 1px;
+      border-bottom: 1px solid rgba(170, 170, 170, .6)
+    }
+
+    .compose .forms .visible {
+      width: 100%;
+      display: block !important
+    }
+
+    .compose .forms .action {
+      margin-top: 50px
+    }
+
+    .compose .forms .group:nth-child(1) {
+      -webkit-animation-duration: .1s;
+      animation-duration: .1s
+    }
+
+    .compose .forms .group:nth-child(2) {
+      -webkit-animation-duration: .2s;
+      animation-duration: .2s
+    }
+
+    .compose .forms .group:nth-child(3) {
+      -webkit-animation-duration: .3s;
+      animation-duration: .3s
+    }
+
+    .compose .forms .group:nth-child(4) {
+      -webkit-animation-duration: .4s;
+      animation-duration: .4s
+    }
+
+    .chats .tabs-list {
+      margin-bottom: 15px
+    }
+
+    .chats .tabs-list .tab {
+      float: left;
+      color: #aaa;
+      font-size: 12px;
+      font-weight: 400;
+      margin-right: 15px;
+      padding-bottom: 2px;
+      text-decoration: none;
+      text-transform: uppercase;
+      border-bottom: 2px solid transparent
+    }
+
+    .chats .tabs-list .tab.active,
+    .chats .tabs-list .tab:hover {
+      color: #fff;
+      border-bottom: 2px solid
+    }
+
+    .chats .active-users .user {
+      padding: 5px 0;
+      cursor: default
+    }
+
+    .chats .active-users .photo {
+      width: 40px;
+      height: 40px;
+      overflow: hidden;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 3px 2px rgba(0, 0, 0, .4)
+    }
+
+    .chats .active-users .photo img {
+      width: 100%
+    }
+
+    .chats .active-users .desc {
+      margin-left: 15px
+    }
+
+    .chats .active-users .desc p {
+      margin: 0;
+      font-size: 14px
+    }
+
+    .chats .active-users .desc .name {
+      font-weight: 400
+    }
+
+    .chats .active-users .desc .position {
+      color: #aaa;
+      font-size: 12px
+    }
+
+    .chats .active-users .user .idle {
+      height: 40px;
+      position: relative
+    }
+
+    .chats .active-users .user .idle>span {
+      top: 50%;
+      right: 0;
+      width: 15px;
+      height: 15px;
+      margin-top: -7.5px;
+      position: absolute;
+      border-radius: 50%;
+      display: inline-block;
+      border: 1px solid #fff
+    }
+
+    .chats .active-users .user .idle>.online {
+      background: #2ecc71
+    }
+
+    .chats .active-users .user .idle>.offline {
+      background: #95a5a6
+    }
+
+    .chats .active-users .user .idle>.away {
+      background: #f2ca27
+    }
+
+    .chats .active-users .user:nth-child(1) {
+      -webkit-animation-duration: .18s;
+      animation-duration: .18s
+    }
+
+    .chats .active-users .user:nth-child(2) {
+      -webkit-animation-duration: .25s;
+      animation-duration: .25s
+    }
+
+    .chats .active-users .user:nth-child(3) {
+      -webkit-animation-duration: .35s;
+      animation-duration: .35s
+    }
+
+    .chats .active-users .user:nth-child(4) {
+      -webkit-animation-duration: .4s;
+      animation-duration: .4s
+    }
+
+    .chats .active-users .user:nth-child(5) {
+      -webkit-animation-duration: .5s;
+      animation-duration: .5s
+    }
+
+    .chats .active-users .user:nth-child(6) {
+      -webkit-animation-duration: .6s;
+      animation-duration: .6s
+    }
+
+    .chats .active-users .user .idle>span:before {
+      right: 20px;
+      bottom: -2px;
+      display: none;
+      padding: 0 5px;
+      font-size: 12px;
+      position: absolute;
+      border-radius: 2px;
+      content: attr(class);
+      background: rgba(0, 0, 0, .4);
+      text-transform: capitalize
+    }
+
+    .chats .active-users .user:hover .idle>span:before {
+      display: block;
+      -webkit-animation: fadeInRight .4s;
+      animation: fadeInRight .4s
+    }
+
+    .profile {
+      margin-top: 40px
+    }
+
+    .profile .photo {
+      margin: auto;
+      width: 150px;
+      height: 150px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 50%;
+      border: 6px solid #ccc
+    }
+
+    .profile .photo img {
+      width: 100%;
+      border-radius: 50%;
+      transition: all .2s ease-in-out 0s
+    }
+
+    .profile .photo .social {
+      top: 50%;
+      left: 50%;
+      width: 30px;
+      z-index: 99;
+      height: 30px;
+      margin-top: -15px;
+      margin-left: -15px;
+      position: absolute;
+      transform: scale(0);
+      transition: all .4s ease-in-out 0s
+    }
+
+    .profile .photo .social .soc-item {
+      top: 0;
+      left: 0;
+      z-index: 19;
+      width: 35px;
+      height: 35px;
+      color: #eee;
+      font-size: 24px;
+      transform: none;
+      line-height: 35px;
+      border-radius: 50%;
+      position: absolute;
+      text-align: center;
+      transition: all .3s cubic-bezier(.68, 1.55, .265, 1)
+    }
+
+    .profile .photo .social .soc-item:hover {
+      color: #fff
+    }
+
+    .profile .photo:after {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      background: rgba(0, 0, 0, .2);
+      transition: all .3s ease-in-out 0s
+    }
+
+    .profile .photo:hover img {
+      transform: scale(.5) rotate(10deg)
+    }
+
+    .profile .photo:hover .social,
+    .profile .photo:hover:after {
+      transform: scale(1)
+    }
+
+    .profile .photo:hover .social .soc-count-1 {
+      transform: translate(0, -50px)
+    }
+
+    .profile .photo:hover .social .soc-count-2 {
+      transform: translate(-35px, -35px)
+    }
+
+    .profile .photo:hover .social .soc-count-3 {
+      transform: translate(-50px, 0)
+    }
+
+    .profile .photo:hover .social .soc-count-4 {
+      transform: translate(-35px, 35px)
+    }
+
+    .profile .photo:hover .social .soc-count-5 {
+      transform: translate(0, 50px)
+    }
+
+    .profile .photo:hover .social .soc-count-6 {
+      transform: translate(35px, 35px)
+    }
+
+    .profile .photo:hover .social .soc-count-7 {
+      transform: translate(50px, 0)
+    }
+
+    .profile .photo:hover .social .soc-count-8 {
+      transform: translate(35px, -35px)
+    }
+
+    .profile .details .heading {
+      padding: 5px;
+      margin: 10px 0;
+      text-align: center;
+      border-radius: 15px;
+      background: rgba(0, 0, 0, .4)
+    }
+
+    .profile .details .heading>.name {
+      font-size: 18px;
+      font-weight: 400;
+      padding-right: 5px
+    }
+
+    .profile .details .heading>.position {
+      font-size: 12px;
+      padding-left: 5px;
+      vertical-align: 1px;
+      border-left: 1px solid
+    }
+
+    .profile .details .text {
+      margin: 0;
+      color: #ccc;
+      line-height: 24px;
+      text-align: center;
+      -webkit-animation-duration: .4s;
+      animation-duration: .4s
+    }
+
+    .setting-list {
+      margin-left: -15px;
+      margin-right: -15px
+    }
+
+    .setting-list .gear {
+      padding: 10px 15px;
+      font-size: 14px;
+      font-weight: 400
+    }
+
+    .setting-list .gear:not(:last-child) {
+      border-bottom: 1px solid rgba(170, 170, 170, .4)
+    }
+
+    .setting-list .gear>.action {
+      color: #aaa
+    }
+
+    .setting-list .gear:nth-child(1) {
+      -webkit-animation-duration: .1s;
+      animation-duration: .1s
+    }
+
+    .setting-list .gear:nth-child(2) {
+      -webkit-animation-duration: .2s;
+      animation-duration: .2s
+    }
+
+    .setting-list .gear:nth-child(3) {
+      -webkit-animation-duration: .3s;
+      animation-duration: .3s
+    }
+
+    .setting-list .gear:nth-child(4) {
+      -webkit-animation-duration: .4s;
+      animation-duration: .4s
+    }
+
+    .setting-list .gear:nth-child(5) {
+      -webkit-animation-duration: .5s;
+      animation-duration: .5s
+    }
+
+    .setting-list .gear:nth-child(6) {
+      -webkit-animation-duration: .6s;
+      animation-duration: .6s
+    }
+
+    .credits .title {
+      line-height: 24px;
+      text-align: center
+    }
+
+    .credits .credit-ol {
+      margin: 20px 0;
+      counter-reset: credits
+    }
+
+    .credits .credit-li {
+      line-height: 30px;
+      position: relative;
+      padding-left: 20px
+    }
+
+    .credits .credit-li:before {
+      top: 0;
+      left: 0;
+      position: absolute;
+      content: counter(credits);
+      counter-increment: credits
+    }
+
+    .credits .credit-li:nth-child(1) {
+      -webkit-animation-duration: .3s;
+      animation-duration: .3s
+    }
+
+    .credits .credit-li:nth-child(2) {
+      -webkit-animation-duration: .4s;
+      animation-duration: .4s
+    }
+
+    .credits .credit-li:nth-child(3) {
+      -webkit-animation-duration: .5s;
+      animation-duration: .5s
+    }
+
+    .credits .credit-li:nth-child(4) {
+      -webkit-animation-duration: .6s;
+      animation-duration: .6s
+    }
+
+    .credits .credit-li:nth-child(5) {
+      -webkit-animation-duration: .7s;
+      animation-duration: .7s
+    }
+
+    .credits .credit-li:nth-child(6) {
+      -webkit-animation-duration: .8s;
+      animation-duration: .8s
+    }
+
+    .credits .credit-li a {
+      color: inherit;
+      text-decoration: none;
+      padding: 1px 5px;
+      border-radius: 13px;
+      transition: all .6s ease-in-out 0s
+    }
+
+    .credits .credit-li:hover a {
+      box-shadow: 150px 0 0 0 rgba(0, 0, 0, .4) inset
+    }
+
+    .credits .credit-li span {
+      font-size: 13px
+    }
+
+    .credits .text {
+      margin-top: 10px;
+      line-height: 22px;
+      text-align: center
+    }
+
+
+    /* back to product */
+    button {
+  font-family: inherit;
+  font-size: 20px;
+  background: royalblue;
+  color: white;
+  padding: 0.7em 1em;
+  padding-left: 0.9em;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s;
+  float: right;
+}
+
+button span {
+  display: block;
+  margin-left: 0.5em;
+  transition: all 0.3s ease-in-out;
+}
+
+button svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+button:hover .svg-wrapper {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+button:hover svg {
+  transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+button:hover span {
+  transform: translateX(9em);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+  from {
+    transform: translateY(0.1em);
+  }
+
+  to {
+    transform: translateY(-0.1em);
+  }
+}
+
+
+  </style>
+</head>
+
+<body>
+  <div class="mobile-wrap">
+    <div class="mobile clearfix">
+      <div class="header">
+        <span class="ion-ios-navicon pull-left"><i></i></span>
+        <span class="title">OverView</span>
+        
+        <div class="search">
+          <form method="post">
+            <input type="search" placeholder="Search Here">
+          </form>
+        </div>
+      </div>
+      <div class="sidebar">
+        
+        <div class="sidebar-overlay">
+          <button ion-button menuClose><i class="fa-solid fa-x"></i></button>
+        </div>
+        <div class="sidebar-content">
+          <div class="top-head">
+            <div class="name"><img src="http://i-player.in/images/icon/CMS.png" alt="" width="90%"></div>
+            <div class="email" style="font-size: 3rem;">CMS</div>
+          </div>
+          <div class="nav-left">
+            <a href="#home"> <i class="fa-sharp fa-solid fa-eye"></i></span> OverView</a>
+            <a href="#alarm"><i class="fa-solid fa-wand-magic-sparkles"></i></span> Features</a>
+            <a href="#compose"><i class="fa-solid fa-image"></i></span> Graphical</a>
+            <a href="#chats"><i class="fa-sharp fa-solid fa-bell-slash"></i></span> Silent Features</a>
+            <a href="#profile"><i class="fa-solid fa-feather"></i></span> Specification</a>
+           
+          </div>
+        </div>
+        
+      </div>
+      <div class="content">
+        <div class="html search">
+          <div class="title bounceInDown animated">Search Result</div>
+          <p class="flipInX animated">Sorry,<br>no matches found for <b class="key"></b></p>
+        </div>
+        <div class="html welcome visible" style="height: 800px;">
+          <div class="datetime">
+            <section id="OverView">
+              <div class="pop-container-1"
+                style="margin-inline: 10%; text-align: left; margin-top: 15px; color: black;">
+                <h1 style="color: #00FF80;"><u> OverView</u></h1>
+                <p style="color: white; font-size: x-large; line-height: normal;">Proof of play is a real time ad monitoring program used by broadcaster. It monitors advertisements being played in real time and looks for discrepancies and problems Broadcasters can now provide ad buyers peace of mind and tangible proof that their advertisement was run on time and without problems. If you are paying good money for Commercial wouldn't you want to see proof that it was played correctly? With Proof of Play, you can.</p>
+
+                <p style="color: white; font-size: x-large; line-height: normal;">Proof of Play Interactivity allows you to instantly view the current advertisement! Including “Pre Rolls” that allow a 10 minute advance teaser promo of an Ad to come our technology enables multiple “Calls to Action”. Current and past cleared ads are just a mouse click away. All aired events are verified by Proof of Play’s video verification routine. You can now see instantly that an event was completely and correctly aired. </p>
+
+                <p style="color: white; font-size: x-large; line-height: normal;">Provides a “Heads-Up notification” for call(receiving) centers for upcoming Ads that require awaiting personnel for predictable increased call volume, interactivity with customizable “calls to action” to verify the source of the prospect.</p>
+
+               
+              </div>
+            </section>
+
+          </div>
+        </div>
+        <div class="html alarm">
+          <div class="forecast clearfix">
+            <section id="Feauters">
+              <div class="pop-container-2"
+                style="margin-inline: 10%; text-align: left; margin-top: 15px; color: white;">
+                <h1 style="color: #00FF80;"><u>Feauters</u></h1>
+                <h2>1) Reliable:</h2>
+                <p style="font-size: x-large; line-height: normal;">POP is conviction as the watching for some of our client's to provide use of viewing the Preview for numerous Process of business in advertisement of current and past.  </p>
+
+                <h2>2) Flexible & Scalable:</h2>
+                <p style="font-size: x-large; line-height: normal;">POP is capable of changing the view of application to multi-channel mode, it allows you to view more the one channel form website or web browser, incorporate new media workflow about to History of all the status of channel with Current and Past information.</p>
+
+                <h2>3) Excellent Performance & Effective ratio </h2>
+                <p style="font-size: x-large; line-height: normal;">CIt allows you to manage the scope of business from anywhere in geographical nature. POP does not require expensive hardware or ultra fast workstations, thus avoiding unnecessary expenses.</p>
+
+                <h2>4)  Instantly advance user-friendly edge </h2>
+                <p style="font-size: x-large; line-height: normal;">t endows with the paramount GUI for use in way to organize the fast and best system of resulting application to provide enriched user occurrence. No need to learn from graze. No need to prepare data record to start the work instantly. </p>
+
+                <h2>5) Real Time Clearance  </h2>
+                <p style="font-size: x-large; line-height: normal;">Our new real time technology allows for instant and confirmed clearance. We can also inject this data into advertiser clearance software systems via real time web services. </p>
+
+                <h2>6)Live Copy reconcile solutions </h2>
+                <p style="font-size: x-large; line-height: normal;">Commercials that are read live can now be cleared much like recorded ads. All live read ads will contain the beginning air time, total duration, media recording and a speech to text translation.</p>
+
+               
+
+              </div>
+            </section>
+
+          </div>
+        </div>
+        <div class="html compose">
+          <div class="forms">
+            <section id="Graphical">
+              <h1 style="color: #00FF80;"><u>Graphical</u></h1>
+              <img src="http://i-player.in/images/product/pop.jpg" alt="" width="100%" >
+            </section>
+          </div>
+        </div>
+        <div class="html chats" style="height: 800px;">
+          <section id="Silent_Features">
+
+            <div class="pop-container-3" style="margin-inline: 10%; text-align: left; margin-top: 10px;">
+              <h1 style="color: #00FF80;"><u>Silent_Features</u></h1><br>
+              <i class="fa-solid fa-pen-nib" style="color: aqua;"></i> <span style="color: white ;
+            font-size:x-large;">   Real-time Viewable Ad History of current and past List on air.</span><br><br><br><br>
+              <i class="fa-solid fa-pen-nib" style="color: aqua;"></i><span style="color: white;
+             font-size:x-large;">    Clip previewing at a glance any time of current and past advertisement</span><br><br><br><br>
+              <i class="fa-solid fa-pen-nib" style="color: aqua;"></i><span style="color: white;
+              font-size:x-large;">       Operable through a browser environment with local or remote connections.</span><br><br><br><br>
+              <i class="fa-solid fa-pen-nib" style="color: aqua;"></i><span style="color: white;
+               font-size:x-large;"> Provide Facility to Broadcaster to directly get relevant to add through internet.</span><br><br><br><br>
+              <i class="fa-solid fa-pen-nib" style="color: aqua;"></i><span style="color: white;
+                font-size:x-large;"> All type of advertisement played on air are maintained as a Proof in order to maintain the relationship.</span><br><br><br><br>
+              
+            </div>
+          </section>
+
+        </div>
+        <div class="html profile" style="height: 800px;">
+          <section id="Specification3">
+            <div class="pop-container-3" style="margin-inline: 10%; text-align: left; margin-top: 20px; line-height: normal;" >
+              <h1 style="color: #00FF80;"><u>Specification</u></h1><br>
+             <p style="color: white; font-size: larger;"> Specifications and designs are subject to change without notice</p><br><br><br>
+             <p style="color: white; font-size: larger;">CMS applications are supported by Major operating system. <br><br><br>
+              The workstation should include:</p>
+            <b> <small style="color: rgb(11, 142, 41); ">
+              High Speed internet. <br><br>
+              Silverlight Compatbile Devices.
+             </small></b><br><br>
+
+               Compatible With : <img src="http://i-player.in/images/compatible.png" alt="" width="30%">
+              
+
+
+             </p>
+
+            </div>
+
+          </section>
+        </div>
+
+      </div>
+
+    <a href="product.html">  <button>
+        <div class="svg-wrapper-1">
+          <div class="svg-wrapper">
+            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z" fill="currentColor"></path>
+            </svg>
+          </div>
+        </div>
+        <span>Back To Home</span>
+      </button></a>
+      
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+    crossorigin="anonymous"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+  <script>
+   $(function () {
+    App.init();
+});
+var App = {
+    init: function () {
+        this.datetime(), this.side.nav(), this.search.bar(), this.navigation(), this.hyperlinks(), setInterval("App.datetime();", 1e3);
+    },
+    datetime: function () {
+        var e = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"),
+            t = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"),
+            a = new Date(),
+            i = a.getYear();
+        1e3 > i && (i += 1900);
+        var s = a.getDay(),
+            n = a.getMonth(),
+            r = a.getDate();
+        10 > r && (r = "0" + r);
+        var l = a.getHours(),
+            c = a.getMinutes(),
+            h = a.getSeconds(),
+            o = "AM";
+        l >= 12 && (o = "PM"),
+            l > 12 && (l -= 12),
+            0 == l && (l = 12),
+            9 >= c && (c = "0" + c),
+            9 >= h && (h = "0" + h),
+            $(".welcome .datetime .day").text(e[s]),
+            $(".welcome .datetime .date").text(t[n] + " " + r + ", " + i),
+            $(".welcome .datetime .time").text(l + ":" + c + ":" + h + " " + o);
+    },
+    title: function (e) {
+        return $(".header>.title").text(e);
+    },
+    side: {
+        nav: function () {
+            this.toggle(), this.navigation();
+        },
+        toggle: function () {
+            $(".ion-ios-navicon").on("touchstart click", function (e) {
+                e.preventDefault(), $(".sidebar").toggleClass("active"), $(".nav").removeClass("active"), $(".sidebar .sidebar-overlay").removeClass("fadeOut animated").addClass("fadeIn animated");
+            }),
+                $(".sidebar .sidebar-overlay").on("touchstart click", function (e) {
+                    e.preventDefault(), $(".ion-ios-navicon").click(), $(this).removeClass("fadeIn").addClass("fadeOut");
+                });
+        },
+        navigation: function () {
+            $(".nav-left a").on("touchstart click", function (e) {
+                e.preventDefault();
+                var t = $(this).attr("href").replace("#", "");
+                $(".sidebar").toggleClass("active"), $(".html").removeClass("visible"), "home" == t || "" == t || null == t ? $(".html.welcome").addClass("visible") : $(".html." + t).addClass("visible"), App.title($(this).text());
+            });
+        },
+    },
+    search: {
+        bar: function () {
+            $(".header .ion-ios-search").on("touchstart click", function () {
+                var e = ($(".header .search input").hasClass("search-visible"), $(".header .search input").val());
+                return "" != e && null != e ? (App.search.html($(".header .search input").val()), !1) : ($(".nav").removeClass("active"), $(".header .search input").focus(), void $(".header .search input").toggleClass("search-visible"));
+            }),
+                $(".search form").on("submit", function (e) {
+                    e.preventDefault(), App.search.html($(".header .search input").val());
+                });
+        },
+        html: function (e) {
+            $(".search input").removeClass("search-visible"),
+                $(".html").removeClass("visible"),
+                $(".html.search").addClass("visible"),
+                App.title("Result"),
+                $(".html.search").html($(".html.search").html()),
+                $(".html.search .key").html(e),
+                $(".header .search input").val("");
+        },
+    },
+    navigation: function () {
+        $(".nav .mask").on("touchstart click", function (e) {
+            e.preventDefault(), $(this).parent().toggleClass("active");
+        });
+    },
+    hyperlinks: function () {
+        $(".nav .nav-item").on("click", function (e) {
+            e.preventDefault();
+            var t = $(this).attr("href").replace("#", "");
+            $(".html").removeClass("visible"), $(".html." + t).addClass("visible"), $(".nav").toggleClass("active"), App.title($(this).text());
+        });
+    },
+};
+
+  </script>
+
+
+</html>
